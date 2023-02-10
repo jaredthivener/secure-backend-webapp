@@ -77,42 +77,7 @@ resource DNSlink2 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06
   }
 }
 
-resource privateEndpoint_00 'Microsoft.Network/privateEndpoints@2022-07-01' = {
-  name: 'keyvault'
-  location: location
-  properties: {
-    subnet: {
-      id: subnet2.id
-    }
-    privateLinkServiceConnections: [
-      {
-        id: keyvaultId
-      }
-    ]
-  }
-  dependsOn: [
-    virtualNetwork
-  ]
-}
-
-resource privateEndpoint_01 'Microsoft.Network/privateEndpoints@2022-07-01' = {
-  name: 'cognitiveService'
-  location: location
-  properties: {
-    subnet: {
-      id: subnet2.id
-    }
-    privateLinkServiceConnections: [
-      {
-        id: cognitiveServiceId
-      }
-    ]
-  }
-  dependsOn: [
-    virtualNetwork
-  ]
-}
-
 
 output vnetResourceId string = virtualNetwork.id 
 output integrationSubnetId string = subnet1.id
+output PrivateEndpointSubnetId string = subnet2.id

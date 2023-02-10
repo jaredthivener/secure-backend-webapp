@@ -31,4 +31,19 @@ resource keyVault 'Microsoft.KeyVault/vaults@2019-09-01' = {
   }
 }
 
+resource privateEndpoint_00 'Microsoft.Network/privateEndpoints@2022-07-01' = {
+  name: 'keyvault'
+  location: location
+  properties: {
+    subnet: {
+      id: subnet2.id
+    }
+    privateLinkServiceConnections: [
+      {
+        id: keyVault.id
+      }
+    ]
+  }
+}
+
 output keyvaultResourceId string = keyVault.id

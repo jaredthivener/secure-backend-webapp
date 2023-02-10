@@ -12,4 +12,22 @@ resource cognitiveService 'Microsoft.CognitiveServices/accounts@2022-10-01' = {
   }
 }
 
+resource privateEndpoint_01 'Microsoft.Network/privateEndpoints@2022-07-01' = {
+  name: 'cognitiveService'
+  location: location
+  properties: {
+    subnet: {
+      id: subnet2.id
+    }
+    privateLinkServiceConnections: [
+      {
+        id: cognitiveServiceId
+      }
+    ]
+  }
+  dependsOn: [
+    virtualNetwork
+  ]
+}
+
 output cognitiveResourceId string = cognitiveService.id
