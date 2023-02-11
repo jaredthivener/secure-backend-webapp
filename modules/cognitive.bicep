@@ -1,4 +1,4 @@
-param location string = 'centralus'
+param location string = 'eastus2'
 param cgsSKU string = 'F0'
 param cgsKind string = 'TextAnalytics'
 param cgsName string = 'cs-${uniqueString(resourceGroup().id)}'

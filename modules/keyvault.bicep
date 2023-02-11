@@ -1,4 +1,4 @@
-param location string = 'centralus'
+param location string = 'eastus2'
 param KeyvaultName string = 'keyvault-${uniqueString(resourceGroup().id)}'
 param App_Service_Identity string
 

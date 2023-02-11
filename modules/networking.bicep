@@ -1,4 +1,4 @@
-param location string = 'centralus'
+param location string = 'eastus2'
 param vnetName string = 'vnet-${uniqueString(resourceGroup().id)}'
 param subnet1Name string = 'vnet-integration-subnet'
 param subnet2Name string = 'private-endpoint-subnet'
