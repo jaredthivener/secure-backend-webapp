@@ -27,6 +27,11 @@ module keyvault 'modules/keyvault.bicep' = {
     App_Service_Identity: appService.outputs.appServiceAppIdentity
     location: location
   }
+  dependsOn: [
+    [
+      appService
+    ]
+  ]
 }
 
 //AppService module 
@@ -37,6 +42,11 @@ module appService 'modules/app-service.bicep' = {
     location: location
     virtualNetworkSubnetId: vnet.outputs.integrationSubnetId
   }
+  dependsOn: [
+    [
+      vnet
+    ]
+  ]
 }
 
 //Cognitive module
