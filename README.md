@@ -4,6 +4,9 @@ Azure Bicep Project to deploy a [secure backend webapp](https://azure.github.io/
 
 # Instructions
 Clone repo, change directory to `infra` folder and execute azure cli command to deployment config:
+
 example:
+
 `cd secure-backend-webapp/infra/`
+
 `az deployment sub create -l eastus2 -n secure-backend-webapp -f main.bicep`
