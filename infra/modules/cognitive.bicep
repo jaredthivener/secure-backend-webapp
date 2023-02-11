@@ -7,6 +7,9 @@ resource cognitiveService 'Microsoft.CognitiveServices/accounts@2022-10-01' = {
   name: cgsName
   location: location
   kind: cgsKind
+  properties: {
+    publicNetworkAccess: 'Disabled'
+  }
   sku: {
     name: cgsSKU
   }
