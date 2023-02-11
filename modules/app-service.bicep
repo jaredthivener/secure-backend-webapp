@@ -1,4 +1,4 @@
-param location string
+param location string = 'centralus'
 
 @description('The type of environment. This must be dev or prod.')
 @allowed([
@@ -11,11 +11,12 @@ param environmentType string
 param appServiceAppName string = 'app${uniqueString(resourceGroup().id)}'
 
 var appServicePlanName = 'app${uniqueString(resourceGroup().id)}'
-var appServicePlanSkuName = (environmentType == 'prod') ? 'P2v3' : 'F1'
-var appServicePlanTierName = (environmentType == 'prod') ? 'PremiumV3' : 'Free'
+var appServicePlanSkuName = (environmentType == 'dev') ?  'F1' : 'P2v3'
+var appServicePlanTierName = (environmentType == 'dev') ? 'Free' : 'PremiumV3' 
 
 param virtualNetworkSubnetId string 
 
+//Create App Service Plan
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: appServicePlanName
   location: location
@@ -26,6 +27,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   }
 }
 
+//Create App Service Web App
 resource appServiceApp 'Microsoft.Web/sites@2022-03-01' = {
   name: appServiceAppName
   location: location
@@ -39,4 +41,5 @@ resource appServiceApp 'Microsoft.Web/sites@2022-03-01' = {
   }
 }
 
+//Output App Service Web App Managed Identity Principal Id
 output appServiceAppIdentity string = appServiceApp.identity.principalId

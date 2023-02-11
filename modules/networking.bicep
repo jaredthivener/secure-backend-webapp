@@ -3,10 +3,9 @@ param vnetName string = 'securebackend-vnet'
 param subnet1Name string = 'vnet-integration-subnet'
 param subnet2Name string = 'private-endpoint-subnet'
 param privateDNSzone1Name string = 'privatelink.cognitiveservices.azure.com'
-param privateDNSzone2Name string = 'privatelink.vaultcore.azure.net'
-param keyvaultId string
-param cognitiveServiceId string  
+param privateDNSzone2Name string = 'privatelink.vaultcore.azure.net' 
 
+//Create Virtual Network 
 resource virtualNetwork 'Microsoft.Network/virtualNetworks@2019-11-01' = {
   name: vnetName
   location: location
@@ -19,7 +18,7 @@ resource virtualNetwork 'Microsoft.Network/virtualNetworks@2019-11-01' = {
  }
 }
 
-
+//Create App Service - Integration Subnet w/delegation 
 resource subnet1 'Microsoft.Network/virtualNetworks/subnets@2022-07-01' = {
   name: subnet1Name
   parent: virtualNetwork
@@ -36,6 +35,7 @@ resource subnet1 'Microsoft.Network/virtualNetworks/subnets@2022-07-01' = {
   }
 }
 
+//Create Private Endpoint Subnet
 resource subnet2 'Microsoft.Network/virtualNetworks/subnets@2022-07-01' = {
   name: subnet2Name
   parent: virtualNetwork
@@ -44,12 +44,13 @@ resource subnet2 'Microsoft.Network/virtualNetworks/subnets@2022-07-01' = {
   }
 }
 
-
+//Create Cognitive Services DNS Namespace
 resource privateDNSzone1 'Microsoft.Network/privateDnsZones@2020-06-01' = {
   name: privateDNSzone1Name
   location: 'global'
 }
 
+//Link Cognitive Services DNS Namespace to Virtual Network
 resource DNSlink1 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = {
   name: 'cognitives-service'
   parent: privateDNSzone1
@@ -61,11 +62,13 @@ resource DNSlink1 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06
   }
 }
 
+//Create Keyvault DNS Namespace
 resource privateDNSzone2 'Microsoft.Network/privateDnsZones@2020-06-01' = {
   name: privateDNSzone2Name
   location: 'global'
 }
 
+//Link Keyvault DNS Namespace to Virtual Network
 resource DNSlink2 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = {
   name: 'keyVault'
   parent: privateDNSzone2

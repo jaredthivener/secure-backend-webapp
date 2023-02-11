@@ -14,7 +14,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2019-09-01' = {
     accessPolicies: [
       {
         tenantId: subscription().tenantId
-        objectId: App_Service_Identity //Microsoft Azure App Service
+        objectId: App_Service_Identity //Azure App Service
         permissions: {
           secrets: [
             'create'
@@ -28,21 +28,6 @@ resource keyVault 'Microsoft.KeyVault/vaults@2019-09-01' = {
       name: 'standard'
       family: 'A'
     }
-  }
-}
-
-resource privateEndpoint_00 'Microsoft.Network/privateEndpoints@2022-07-01' = {
-  name: 'keyvault'
-  location: location
-  properties: {
-    subnet: {
-      id: subnet2.id
-    }
-    privateLinkServiceConnections: [
-      {
-        id: keyVault.id
-      }
-    ]
   }
 }
 
