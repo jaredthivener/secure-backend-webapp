@@ -1,18 +1,10 @@
 param location string = 'centralus'
 
-@description('The type of environment. This must be dev or prod.')
-@allowed([
-  'dev'
-  'prod'
-])
-param environmentType string
-
 @description('The name of the App Service app. This name must be globally unique.')
 param appServiceAppName string = 'app${uniqueString(resourceGroup().id)}'
 
 var appServicePlanName = 'app${uniqueString(resourceGroup().id)}'
-var appServicePlanSkuName = (environmentType == 'dev') ?  'F1' : 'P2v3'
-var appServicePlanTierName = (environmentType == 'dev') ? 'Free' : 'PremiumV3' 
+var appServicePlanSkuName = 'S1'
 
 param virtualNetworkSubnetId string 
 
@@ -23,7 +15,6 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   
   sku: {
     name: appServicePlanSkuName
-    tier: appServicePlanTierName
   }
 }
 
@@ -38,6 +29,7 @@ resource appServiceApp 'Microsoft.Web/sites@2022-03-01' = {
     virtualNetworkSubnetId: virtualNetworkSubnetId
     serverFarmId: appServicePlan.id
     httpsOnly: true
+    vnetRouteAllEnabled: true
   }
 }
 
