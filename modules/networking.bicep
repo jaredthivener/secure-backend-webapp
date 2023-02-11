@@ -1,5 +1,5 @@
 param location string = 'centralus'
-param vnetName string = 'vnet${uniqueString(resourceGroup().id)}'
+param vnetName string = 'vnet-${uniqueString(resourceGroup().id)}'
 param subnet1Name string = 'vnet-integration-subnet'
 param subnet2Name string = 'private-endpoint-subnet'
 param privateDNSzone1Name string = 'privatelink.cognitiveservices.azure.com'
@@ -33,6 +33,11 @@ resource subnet1 'Microsoft.Network/virtualNetworks/subnets@2022-07-01' = {
       }
     ]
   }
+  dependsOn: [
+    [
+      virtualNetwork
+    ]
+  ]
 }
 
 //Create Private Endpoint Subnet
@@ -42,6 +47,11 @@ resource subnet2 'Microsoft.Network/virtualNetworks/subnets@2022-07-01' = {
   properties: {
     addressPrefix: '10.0.1.0/24'
   }
+  dependsOn: [
+    [
+      virtualNetwork
+    ]
+  ]
 }
 
 //Create Cognitive Services DNS Namespace
