@@ -1,9 +1,9 @@
 param location string = 'eastus2'
 
 @description('The name of the App Service app. This name must be globally unique.')
-param appServiceAppName string = 'app${uniqueString(resourceGroup().id)}'
+param appServiceAppName string = 'app-${uniqueString(resourceGroup().id)}'
 
-var appServicePlanName = 'app${uniqueString(resourceGroup().id)}'
+var appServicePlanName = 'app-${uniqueString(resourceGroup().id)}'
 var appServicePlanSkuName = 'S1'
 
 param virtualNetworkSubnetId string 
