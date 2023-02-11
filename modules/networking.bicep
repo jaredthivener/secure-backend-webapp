@@ -24,7 +24,7 @@ resource subnet1 'Microsoft.Network/virtualNetworks/subnets@2022-07-01' = {
   parent: virtualNetwork
   properties: {
     addressPrefix: '10.0.0.0/24'
-  delegations: [
+    delegations: [
       {
       name: 'Microsoft.Web/serverfarms'
       properties: {
@@ -54,6 +54,7 @@ resource privateDNSzone1 'Microsoft.Network/privateDnsZones@2020-06-01' = {
 resource DNSlink1 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = {
   name: 'cognitives-service'
   parent: privateDNSzone1
+  location: 'global'
   properties: {
     registrationEnabled: false
     virtualNetwork: {
@@ -72,6 +73,7 @@ resource privateDNSzone2 'Microsoft.Network/privateDnsZones@2020-06-01' = {
 resource DNSlink2 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = {
   name: 'keyVault'
   parent: privateDNSzone2
+  location: 'global'
   properties: {
     registrationEnabled: false
     virtualNetwork: {
