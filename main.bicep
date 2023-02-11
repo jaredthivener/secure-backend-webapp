@@ -1,7 +1,7 @@
 targetScope = 'subscription'
 
 param location string = 'centralus'
-param rgName string = 'rg-securebackendsetup'
+param rgName string = 'rg-securebackend-webapp'
 
 
 //Create Resource Group
@@ -43,7 +43,7 @@ module appService 'modules/app-service.bicep' = {
 //Cognitive module
 module cognitive 'modules/cognitive.bicep' = {
   scope: resourceGroup
-  name: 'cognitive'
+  name: 'cognitive-services'
   params: {
     location: location
   }
