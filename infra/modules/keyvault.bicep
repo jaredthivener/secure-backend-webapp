@@ -17,6 +17,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2019-09-01' = {
         objectId: App_Service_Identity //Azure App Service
         permissions: {
           secrets: [
+            'list'
             'create'
             'get'
             'update'
