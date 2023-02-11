@@ -2,17 +2,12 @@ targetScope = 'subscription'
 
 param location string = 'centralus'
 param rgName string = 'rg-securebackendsetup'
-param tags object = {
-  Environement: 'Dev'
-  Administrator: 'Alina'
-  Team: 'Slalom'
-}
+
 
 //Create Resource Group
 resource resourceGroup 'Microsoft.Resources/resourceGroups@2022-09-01' = {
   name: rgName
   location: location
-  tags: tags
 }
 
 //vnet module
@@ -21,11 +16,8 @@ module vnet 'modules/networking.bicep' = {
   name: 'virtual-network'
   params: {
     location: location
-    keyvaultId: keyvault.outputs.keyvaultResourceId
-    cognitiveServiceId: cognitive.outputs.cognitiveResourceId
   }
 }
-
 
 //Keyvault module
 module keyvault 'modules/keyvault.bicep' = {
@@ -40,11 +32,11 @@ module keyvault 'modules/keyvault.bicep' = {
 //AppService module 
 module appService 'modules/app-service.bicep' = {
   scope: resourceGroup
-  name: 'app-service'
+  name: 'app-services'
   params: {
     environmentType: 'dev'
     location: location
-    virtualNetworkSubnetId: vnet.outputs.vnetResourceId
+    virtualNetworkSubnetId: vnet.outputs.integrationSubnetId
   }
 }
 
