@@ -34,9 +34,13 @@ resource keyVault 'Microsoft.KeyVault/vaults@2019-09-01' = {
   }
 }
 
-resource keyVaultSecret 'Microsoft.KeyVault/vaults/secrets@2019-09-01' = {
-  name: '${keyVault}/CognitiveServiceAccountKey1'
+resource keyVaultSecret 'Microsoft.KeyVault/vaults/secrets@2022-07-01' = {
+  name: 'CognitiveServiceAccountKey1'
+  parent: keyVault
   properties: {
+    attributes: {
+      enabled: true
+    }
     value: CognitiveServiceAccountKey1
   }
 }
