@@ -1,6 +1,8 @@
 param location string = 'eastus2'
 param KeyvaultName string = 'keyvault-${uniqueString(resourceGroup().id)}'
 param App_Service_Identity string
+@secure()
+param CognitiveServiceAccountKey1 string
 
 resource keyVault 'Microsoft.KeyVault/vaults@2019-09-01' = {
   name: KeyvaultName
@@ -31,5 +33,13 @@ resource keyVault 'Microsoft.KeyVault/vaults@2019-09-01' = {
     }
   }
 }
+
+resource keyVaultSecret 'Microsoft.KeyVault/vaults/secrets@2019-09-01' = {
+  name: '${keyVault}/CognitiveServiceAccountKey1'
+  properties: {
+    value: CognitiveServiceAccountKey1
+  }
+}
+
 
 output keyvaultResourceId string = keyVault.id

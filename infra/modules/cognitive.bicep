@@ -12,4 +12,5 @@ resource cognitiveService 'Microsoft.CognitiveServices/accounts@2022-10-01' = {
   }
 }
 
+output csAccountKeys string = cognitiveService.listKeys().key1
 output cognitiveResourceId string = cognitiveService.id

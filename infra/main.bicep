@@ -25,6 +25,7 @@ module keyvault 'modules/keyvault.bicep' = {
   name: 'keyvault'
   params: {
     App_Service_Identity: appService.outputs.appServiceAppIdentity
+    CognitiveServiceAccountKey1: cognitive.outputs.csAccountKeys
     location: location
   }
   dependsOn: [
