@@ -57,4 +57,9 @@ module cognitive 'modules/cognitive.bicep' = {
   params: {
     location: location
   }
+  dependsOn: [
+    [
+      appService
+    ]
+  ]
 }
