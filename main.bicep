@@ -34,7 +34,6 @@ module appService 'modules/app-service.bicep' = {
   scope: resourceGroup
   name: 'app-services'
   params: {
-    environmentType: 'dev'
     location: location
     virtualNetworkSubnetId: vnet.outputs.integrationSubnetId
   }
