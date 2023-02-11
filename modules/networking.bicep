@@ -1,5 +1,5 @@
 param location string = 'centralus'
-param vnetName string = 'securebackend-vnet'
+param vnetName string = 'vnet${uniqueString(resourceGroup().id)}'
 param subnet1Name string = 'vnet-integration-subnet'
 param subnet2Name string = 'private-endpoint-subnet'
 param privateDNSzone1Name string = 'privatelink.cognitiveservices.azure.com'
