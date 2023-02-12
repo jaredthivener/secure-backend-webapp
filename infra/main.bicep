@@ -24,7 +24,7 @@ module keyvault 'modules/keyvault.bicep' = {
   scope: resourceGroup
   name: 'keyvault'
   params: {
-    // App_Service_Identity: appService.outputs.appServiceAppIdentity
+    App_Service_Identity: appService.outputs.appServiceAppIdentity
     CognitiveServiceAccountKey1: cognitive.outputs.csAccountKeys
     location: location
   }
