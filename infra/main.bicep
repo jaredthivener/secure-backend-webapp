@@ -50,7 +50,7 @@ module appService 'modules/app-service.bicep' = {
   ]
 }
 
-//Cognitive module
+//Cognitive Services module
 module cognitive 'modules/cognitive.bicep' = {
   scope: resourceGroup
   name: 'cognitive-services'
