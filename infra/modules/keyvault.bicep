@@ -28,6 +28,9 @@ resource keyVault 'Microsoft.KeyVault/vaults@2019-09-01' = {
         }
       }
     ]
+    networkAcls: {
+      defaultAction: 'Deny'
+    }
     sku: {
       name: 'standard'
       family: 'A'
