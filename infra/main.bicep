@@ -28,6 +28,7 @@ module keyvault 'modules/keyvault.bicep' = {
     CognitiveServiceAccountKey1: cognitive.outputs.csAccountKeys
     location: location
     PrivateEndpointSubnet: vnet.outputs.PrivateEndpointSubnetId
+    PrivateDNSZone: vnet.outputs.keyvaultDnsZone
   }
   dependsOn: [
     [
@@ -58,6 +59,7 @@ module cognitive 'modules/cognitive.bicep' = {
   params: {
     location: location
     PrivateEndpointSubnet: vnet.outputs.PrivateEndpointSubnetId
+    PrivateDNSZone: vnet.outputs.csDnsZone
   }
   dependsOn: [
     [

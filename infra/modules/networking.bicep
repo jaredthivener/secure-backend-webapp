@@ -96,3 +96,5 @@ resource DNSlink2 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06
 output vnetResourceId string = virtualNetwork.id 
 output integrationSubnetId string = subnet1.id
 output PrivateEndpointSubnetId string = subnet2.id
+output csDnsZone string = privateDNSzone1.id
+output keyvaultDnsZone string = privateDNSzone2.id

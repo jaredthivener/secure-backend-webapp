@@ -4,6 +4,7 @@ param App_Service_Identity string
 @secure()
 param CognitiveServiceAccountKey1 string
 param PrivateEndpointSubnet string 
+param PrivateDNSZone string 
 
 resource keyVault 'Microsoft.KeyVault/vaults@2019-09-01' = {
   name: KeyvaultName
@@ -64,6 +65,21 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2022-01-01' = {
     subnet: {
       id: PrivateEndpointSubnet
     }
+  }
+}
+
+resource PrivateEndpointDNSZone 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2022-07-01' = {
+  name: '${KeyvaultName}-zone'
+  parent: privateEndpoint
+  properties: {
+    privateDnsZoneConfigs: [
+      {
+        name: '${KeyvaultName}-zone'
+        properties: {
+          privateDnsZoneId: PrivateDNSZone
+        }
+      }
+    ]
   }
 }
 

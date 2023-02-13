@@ -3,6 +3,7 @@ param cgsSKU string = 'F0'
 param cgsKind string = 'TextAnalytics'
 param cgsName string = 'cs-${uniqueString(resourceGroup().id)}'
 param PrivateEndpointSubnet string
+param PrivateDNSZone string 
 
 resource cognitiveService 'Microsoft.CognitiveServices/accounts@2022-10-01' = {
   name: cgsName
@@ -35,6 +36,21 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2022-01-01' = {
     subnet: {
       id: PrivateEndpointSubnet
     }
+  }
+}
+
+resource PrivateEndpointDNSZone 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2022-07-01' = {
+  name: '${cgsName}-zone'
+  parent: privateEndpoint
+  properties: {
+    privateDnsZoneConfigs: [
+      {
+        name: '${cgsName}-zone'
+        properties: {
+          privateDnsZoneId: PrivateDNSZone
+        }
+      }
+    ]
   }
 }
 
