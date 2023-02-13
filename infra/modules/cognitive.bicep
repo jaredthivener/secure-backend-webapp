@@ -11,6 +11,7 @@ resource cognitiveService 'Microsoft.CognitiveServices/accounts@2022-10-01' = {
   kind: cgsKind
   properties: {
     customSubDomainName: cgsName
+    publicNetworkAccess: 'Disabled'
   }
   sku: {
     name: cgsSKU
