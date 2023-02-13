@@ -31,6 +31,7 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2022-01-01' = {
         }
       }
     ]
+    customNetworkInterfaceName: '${cgsName}-pe'
     subnet: {
       id: PrivateEndpointSubnet
     }

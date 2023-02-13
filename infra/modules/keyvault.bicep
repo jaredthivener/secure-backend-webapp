@@ -46,12 +46,12 @@ resource keyVaultSecret 'Microsoft.KeyVault/vaults/secrets@2022-07-01' = {
 }
 
 resource privateEndpoint 'Microsoft.Network/privateEndpoints@2022-01-01' = {
-  name: '${keyVault}-pe'
+  name: '${KeyvaultName}-pe'
   location: location
   properties: {
     privateLinkServiceConnections: [
       {
-        name: '${keyVault}-pe'
+        name: '${KeyvaultName}-pe'
         properties: {
           privateLinkServiceId: keyVault.id
           groupIds: [
@@ -60,6 +60,7 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2022-01-01' = {
         }
       }
     ]
+    customNetworkInterfaceName: '${KeyvaultName}-pe'
     subnet: {
       id: PrivateEndpointSubnet
     }
