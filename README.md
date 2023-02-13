@@ -16,3 +16,7 @@ example:
 `cd secure-backend-webapp/infra/`
 
 `az deployment sub create -l eastus2 -n secure-backend-webapp -f main.bicep`
+
+Once infrastructure is in place, you can change directory to `src` and deploy zip package. 
+
+`az webapp deployment source config-zip -g rg-securebackend-webapp -n <insert app name> --src ./default.zip`
