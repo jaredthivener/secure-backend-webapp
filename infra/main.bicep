@@ -27,6 +27,7 @@ module keyvault 'modules/keyvault.bicep' = {
     App_Service_Identity: appService.outputs.appServiceAppIdentity
     CognitiveServiceAccountKey1: cognitive.outputs.csAccountKeys
     location: location
+    PrivateEndpointSubnet: vnet.outputs.PrivateEndpointSubnetId
   }
   dependsOn: [
     [
@@ -56,6 +57,7 @@ module cognitive 'modules/cognitive.bicep' = {
   name: 'cognitive-services'
   params: {
     location: location
+    PrivateEndpointSubnet: vnet.outputs.PrivateEndpointSubnetId
   }
   dependsOn: [
     [

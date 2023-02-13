@@ -3,6 +3,7 @@ param KeyvaultName string = 'keyvault-${uniqueString(resourceGroup().id)}'
 param App_Service_Identity string
 @secure()
 param CognitiveServiceAccountKey1 string
+param PrivateEndpointSubnet string 
 
 resource keyVault 'Microsoft.KeyVault/vaults@2019-09-01' = {
   name: KeyvaultName
@@ -44,5 +45,25 @@ resource keyVaultSecret 'Microsoft.KeyVault/vaults/secrets@2022-07-01' = {
   }
 }
 
+resource privateEndpoint 'Microsoft.Network/privateEndpoints@2022-01-01' = {
+  name: '${keyVault}-pe'
+  location: location
+  properties: {
+    privateLinkServiceConnections: [
+      {
+        name: '${keyVault}-pe'
+        properties: {
+          privateLinkServiceId: keyVault.id
+          groupIds: [
+            'vault'
+          ]
+        }
+      }
+    ]
+    subnet: {
+      id: PrivateEndpointSubnet
+    }
+  }
+}
 
 output keyvaultResourceId string = keyVault.id
