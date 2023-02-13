@@ -6,7 +6,9 @@ param appServiceAppName string = 'app-${uniqueString(resourceGroup().id)}'
 var appServicePlanName = 'app-${uniqueString(resourceGroup().id)}'
 var appServicePlanSkuName = 'S1'
 
-param virtualNetworkSubnetId string 
+param virtualNetworkSubnetId string
+param CS_ACCOUNT_NAME string
+param CS_ACCOUNT_KEY string 
 
 //Create App Service Plan
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
@@ -30,6 +32,18 @@ resource appServiceApp 'Microsoft.Web/sites@2022-03-01' = {
     serverFarmId: appServicePlan.id
     httpsOnly: true
     vnetRouteAllEnabled: true
+    siteConfig: {
+      appSettings: [
+        {
+          name: 'CS_ACCOUNT_NAME'
+          value: CS_ACCOUNT_NAME
+        }
+        {
+          name: 'CS_ACCOUNT_KEY'
+          value: CS_ACCOUNT_KEY
+        }
+      ]
+    }
   }
 }
 

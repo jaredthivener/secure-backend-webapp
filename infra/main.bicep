@@ -44,6 +44,8 @@ module appService 'modules/app-service.bicep' = {
   params: {
     location: location
     virtualNetworkSubnetId: vnet.outputs.integrationSubnetId
+    CS_ACCOUNT_NAME: cognitive.outputs.csAccountName
+    CS_ACCOUNT_KEY: cognitive.outputs.csAccountKeys
   }
   dependsOn: [
     [
@@ -63,7 +65,7 @@ module cognitive 'modules/cognitive.bicep' = {
   }
   dependsOn: [
     [
-      appService
+      vnet
     ]
   ]
 }

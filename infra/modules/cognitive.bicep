@@ -56,4 +56,5 @@ resource PrivateEndpointDNSZone 'Microsoft.Network/privateEndpoints/privateDnsZo
 }
 
 output csAccountKeys string = cognitiveService.listKeys().key1
-output cognitiveResourceId string = cognitiveService.id
+output csResourceId string = cognitiveService.id
+output csAccountName string = cognitiveService.name
