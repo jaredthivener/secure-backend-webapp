@@ -87,3 +87,4 @@ resource PrivateEndpointDNSZone 'Microsoft.Network/privateEndpoints/privateDnsZo
 }
 
 output keyvaultResourceId string = keyVault.id
+output keyvaultSecretUri string = keyVaultSecret.properties.secretUri
