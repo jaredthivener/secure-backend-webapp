@@ -3,7 +3,7 @@ Azure Project to convert azure cli commands into Azure bicep IaC
 
 
 
-(https://azure.github.io/AppService/2021/04/22/Site-with-secure-backend-communication.html)
+[Deploying a site with secure backend communication](https://azure.github.io/AppService/2021/04/22/Site-with-secure-backend-communication.html)
 ![securebackend-final-setup](https://user-images.githubusercontent.com/87688021/217966930-671723fb-0be4-44f6-ba38-dc85041ec94d.png)
 
 
